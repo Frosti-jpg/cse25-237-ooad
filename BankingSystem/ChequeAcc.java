@@ -3,7 +3,7 @@ package BankingSystem;
 public class ChequeAcc extends BankAcc {
 
    private final double depositFee = 1.0;
-   private final double withdrawalFeePer100 = 1.0;
+   private final double withdrawalFeePercent = 0.01;
 
    private double transactionLimit;
    private double transactionCounter; //Makes sure you are not hitting the mothly limit
@@ -42,7 +42,7 @@ public class ChequeAcc extends BankAcc {
    public void withdraw(double amount) {
 
       double currentBalance = super.getBalance();  //retrives balance
-      double percentageFee = amount * 0.01;  //calculates 1% of withdrawl amount 
+      double percentageFee = amount * withdrawalFeePercent;  //calculates 1% of withdrawl amount 
 
       if (amount <= 0) {
         System.out.println("Error: Invalid transaction amount.");
