@@ -6,6 +6,7 @@ abstract class BankAcc {
    private double accountBalance;
    private String branch;
    private Customer customer;
+   //private accountOpenDate    for implementing a way to credit interest.
 
 
    //No Arg Constructor
@@ -52,4 +53,19 @@ abstract class BankAcc {
    public String toString() {
       return "AccountNo: " + accountNo + "\n Branch: " + branch + "\n \n Balance: " + accountBalance;
    }
+
+   protected void subtractFromBalance(double amount) {
+    if (amount>0 && amount<=accountBalance) {
+      accountBalance -= amount;
+    }
+   }
+
+   protected void addToBalance(double amount) {
+    if (amount>0) {
+      accountBalance += amount;
+    }
+   }
+
+
+
 }
