@@ -1,12 +1,14 @@
 package BankingSystem;
 
+import java.time.LocalDate;
+
 abstract class BankAcc {
 
    private int accountNo;
    private double accountBalance;
    private String branch;
    private Customer customer;
-   //private accountOpenDate    for implementing a way to credit interest.
+   private final LocalDate dateOpened;    //for implementing a way to credit interest.
 
 
    //No Arg Constructor
@@ -16,6 +18,7 @@ abstract class BankAcc {
       accountBalance = 0.0;
       branch = "";
       customer = null;
+      dateOpened = null;
    }
 
    //Parameterised Constructor
@@ -26,6 +29,7 @@ abstract class BankAcc {
       this.customer = customer;
       
       this.accountBalance = 0.0;
+      this.dateOpened = LocalDate.now();
    }
 
    public abstract void withdraw(double amount);
@@ -49,9 +53,13 @@ abstract class BankAcc {
    public Customer getCustomer() {
       return customer;
    }
+
+   public LocalDate getDateOpened() {
+      return dateOpened;
+   }
    
    public String toString() {
-      return "AccountNo: " + accountNo + "\n Branch: " + branch + "\n \n Balance: " + accountBalance;
+      return "AccountNo: " + accountNo + "\nBranch: " + branch + "\n\nBalance: " + accountBalance + "\n\nAccount Open Since: " +  dateOpened;
    }
 
    protected void subtractFromBalance(double amount) {
@@ -65,7 +73,4 @@ abstract class BankAcc {
       accountBalance += amount;
     }
    }
-
-
-
 }
