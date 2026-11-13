@@ -4,64 +4,45 @@ import java.time.LocalDate;
 
 public class SavingsAcc extends BankAcc {
     
-    private LocalDate lastInterestDate;
-    private LocalDate lastInterestAccumulation;
+    private LocalDate interestLastCredited; //Stores the last date interest added to balance.
+    private LocalDate interestNextCredited; //Stores the next date interest can be added to balance.
+
+    private LocalDate lastAccrualDate; //Stores the date of the last interest accural.
+    private double monthlyAccural; //Stores the value of accural awaiting to be credited to balance.
+    private double totalAccural; //Stores the total of all the interest gathered on the account.
+
     private LocalDate lastWithdrawDate;
     private LocalDate nextWithdrawDate;
     
-    private double accumulatedInterest;
-    private double monthlyAccumulatedInterest;
     private final double percentageDailyInterest;  //0.0005 percent monthly interest, so 0.0060875 per 365.25 days(accounting for the leap year, eqating to 0.0000166667 per day.)
 
     public SavingsAcc() {
 
-        lastInterestDate = null;
-        lastInterestAccumulation = null;
+        interestLastCredited = null;
+        interestNextCredited = null;
+        lastAccrualDate = null;
         lastWithdrawDate = null;
         nextWithdrawDate = null;
 
-        accumulatedInterest = 0.0;
-        monthlyAccumulatedInterest = 0.0;
+        totalAccural = 0.0;
+        monthlyAccural = 0.0;
         percentageDailyInterest = 0.0;
     }
 
     public SavingsAcc(int accountNo, String branch, Customer customer) {
         super(accountNo, branch, customer);
 
-        this.accumulatedInterest = 0.0;
-        monthlyAccumulatedInterest = 0.0;
-        this.percentageDailyInterest = 0.0000166667;
-        this.lastInterestDate = LocalDate.now();
-        lastInterestAccumulation = LocalDate.now();
+        this.totalAccural = 0.0;
+        this.monthlyAccural = 0.0;
+        this.percentageDailyInterest = 0.00166667;
+        this.interestLastCredited = LocalDate.now();
+        this.interestNextCredited = interestLastCredited.plusMonths(1);
+        this.lastAccrualDate = LocalDate.now();
         this.lastWithdrawDate = LocalDate.now();
         this.nextWithdrawDate = lastWithdrawDate.plusYears(2);
     }
 
-
-     //setters
-
-
-    //getters
-
-    public  LocalDate getNextWithrawalDate() {
-        return nextWithdrawDate;
-    }
-
-    public LocalDate getLastWithdralDate() {
-        return lastWithdrawDate;
-    }
-
-    public LocalDate getLastInterestDate() {
-        return lastInterestDate;
-    }
-
-    public double getAccumulatedInterest() {
-        return accumulatedInterest;
-    }
-
-
-    //uncategorised
-
+    //Abstract methods
     @Override
     public void deposit(double amount) {
         if (amount <= 0) {  //will check if the amount entered is 1 or above.
@@ -75,70 +56,88 @@ public class SavingsAcc extends BankAcc {
 
     @Override 
     public void withdraw(double amount) {
+        double tempBalance = getBalance();
+
         if (lastWithdrawDate.isBefore(nextWithdrawDate)) {
             System.out.println("Error: Cannot withraw from this account until " + nextWithdrawDate);
             return;
-        }
-
+        } else if (tempBalance < amount || amount <= 0) {
+            System.out.println("Error: Insufficient Funds or invalid amount input");
+            return;
+        } else {
         subtractFromBalance(amount); //remove from balance
         this.lastWithdrawDate = LocalDate.now();
         this.nextWithdrawDate = lastWithdrawDate.plusYears(2);
-    }
-
-    public void creditInterest() {  //actually adds interest to the principle
-        LocalDate tempLastInterestCredit = lastInterestDate;
-        LocalDate todaysDate = LocalDate.now();
-        int tempDayCounter = 0;
-
-        //Checks whether it is the first 10 days of the month
-        if (todaysDate.getDayOfMonth() >= 1 && todaysDate.getDayOfMonth() <= 10) {
-           do {  //Counts the days
-                tempDayCounter++;
-                tempLastInterestCredit = tempLastInterestCredit.plusDays(1);
-            } while (!tempLastInterestCredit.equals(todaysDate));
-
-            // Additional conddition to make sure its been over 15 days
-            if (tempDayCounter > 15) {
-                addToBalance(monthlyAccumulatedInterest);
-                accumulatedInterest += monthlyAccumulatedInterest;
-                monthlyAccumulatedInterest = 0.0;
-                this.lastInterestDate = todaysDate;
-                return;
-            } else {
-                System.out.println("Error: Can not credit interest now, wait until first week of next month.");
-                return;
-            }
         }
     }
 
+    //getters
 
+    public  LocalDate getNextWithrawalDate() {
+        return nextWithdrawDate;
+    }
 
-    public void accumulateInterest() {  //calculates value of interest
+    public LocalDate getLastWithdralDate() {
+        return lastWithdrawDate;
+    }
+
+    public LocalDate getInterestLastCredited() {
+        return interestLastCredited;
+    }
+
+    public double getAccumulatedInterest() {
+        return totalAccural;
+    }
+
+    
+    //Interfaces
+    
+    public void calculateMonthlyInterest() {  //Handles the accrual of the interest
         int daysCounter = 0;
-        LocalDate tempInterestAccumulationDate = lastInterestAccumulation;
+        LocalDate tempLastAccural = lastAccrualDate;
+        LocalDate tempTodaysDate = LocalDate.now();
 
-        if (lastInterestAccumulation.isEqual(LocalDate.now())) {  //Checks that last intrest accumulation date was not today
+        //Checks whether you aren't performing this more than once a day
+        if (lastAccrualDate.isEqual(tempTodaysDate)) {
             System.out.println("Error: Unable to credit more than once a day.");
             return;
-        } else if (lastInterestAccumulation.isAfter(LocalDate.now())) {  //Checks that last interest accumulation day was not in the future somehow
-            System.out.println("Error: Unexpected Bounds, something went wrong.");
+        } else if (lastAccrualDate.isAfter(tempTodaysDate)) {  //Validates that the last accural date is not after today.
+            System.out.println("Fatal Error: Try again later.");
             return;
         } else {
-            do {  //Counts the days since the last accumulation
+
+            //Counts the number of days since the last interest accural
+            do {
                 daysCounter++;
-                tempInterestAccumulationDate = tempInterestAccumulationDate.plusDays(1);
-            } while (!tempInterestAccumulationDate.equals(LocalDate.now()));
-            
-            //Calculates the value of Interest
+                tempLastAccural = tempLastAccural.plusDays(1);
+            } while (!tempLastAccural.equals(LocalDate.now()));
+
+            //The logic to handle the accumulation
             double tempAccountBalance = getBalance();
-            double tempAccumulatedInterest = (tempAccountBalance * percentageDailyInterest * daysCounter)/100;
-            
+            double tempInterestValue = (tempAccountBalance * percentageDailyInterest * daysCounter)/100;
+
             //Increments to the accumulator and resets last date
-            this.monthlyAccumulatedInterest += tempAccumulatedInterest;
-            lastInterestAccumulation = LocalDate.now();
+            this.monthlyAccural += tempInterestValue;
+            this.lastAccrualDate = LocalDate.now();
             return;
         }
     }
 
+
+    public void creditInterest() {  //Handles adding the accumulated interest value to the balance.
+        LocalDate tempTodaysDate = LocalDate.now();
+
+        //Checks whether it has been a month
+        if (tempTodaysDate.isBefore(interestNextCredited)) {
+            System.out.println("Error: You can ony perform this action on or after " + interestNextCredited);
+            return;
+        } else {
+            addToBalance(monthlyAccural);
+            totalAccural += monthlyAccural;
+            monthlyAccural = 0.0; //Clears for a new month
+
+            interestLastCredited = LocalDate.now();
+            interestNextCredited = interestLastCredited.plusMonths(1);
+        }
+    }
 }
- 
