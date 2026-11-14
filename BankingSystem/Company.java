@@ -50,6 +50,6 @@ public class Company extends Customer {
         this.yearlyTurnover = yearlyTurnover;
     }
 
-    
+
 
 }

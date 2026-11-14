@@ -168,7 +168,8 @@ public class Individual extends Customer {
         return employment;
     } */
 
-    public String toString() {
+    @Override 
+    public String getCustomerDetails() {
         return "PERSONAL DETAILS\n" +
                 "------------------------" +
                 "\nID Number: " + idNumber +
