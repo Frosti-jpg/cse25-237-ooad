@@ -50,6 +50,49 @@ public class Company extends Customer {
         this.yearlyTurnover = yearlyTurnover;
     }
 
+    //getters
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public String getCompanyPhysicalAddress() {
+        return companyPhysicalAddress;
+    }
+
+    public int getCompanyTelephone() {
+        return companyTelephone;
+    }
+
+
+    public double getYearlyTurnover() {
+        return yearlyTurnover;
+    }
+
+    @Override 
+    public String getCustomerDetails() {
+        return "PERSONAL DETAILS\n" +
+                "------------------------" +
+                "\nCompany Name: " + companyName +
+                "\nCompany Type: " + companyType +
+                "\nCompany Physical Address: " + companyPhysicalAddress +
+                "\nCompany Telephone: " + companyTelephone +
+                "\nYearly Turnover: " + yearlyTurnover +
+                
+                "\n\nNEXT OF KIN DETAILS" +
+                "------------------------" +
+
+                "\n\nBANK ACCOUNT DETAILS" +
+                "------------------------" +
+                "\nINVESTMENT ACCOUNT" + 
+                super.getInvestmentAcc() +
+                "\nSAVING ACCOUNT" +
+                super.getSavingsAcc()
+                ;
+    }
 
 }

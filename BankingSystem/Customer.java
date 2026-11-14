@@ -38,7 +38,7 @@ public abstract class Customer {
    }
 
    
-   public abstract void getCustomerDetails();
+   public abstract String getCustomerDetails();
 
 
 
