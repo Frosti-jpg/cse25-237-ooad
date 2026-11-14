@@ -17,7 +17,7 @@ public class Individual extends Customer {
     private String homeAddress;
     //private NextOfKin[] nextOfKin; //
     //private AdditionalIncomeSources[] additionalIncomeSources;
-    //private Employment employment;
+    private Employment employment;
 
     private ChequeAcc chequeAcc;
 
@@ -35,8 +35,8 @@ public class Individual extends Customer {
         homeAddress = "";
         //nextOfKin = null;
         //additionalIncomeSources = null;
-        //employment = null;
-
+        
+        employment = null;
         chequeAcc = null;
     }
 
@@ -53,7 +53,6 @@ public class Individual extends Customer {
         this.postalAddress = postalAddress;
         this.homeAddress = homeAddress;
 
-        //this.employment = employment;
     }
 
     //setters
@@ -102,15 +101,16 @@ public class Individual extends Customer {
         this.homeAddress = homeAddress;
     }
 
-    //remaining are the NextOfKin, AdditionalIncomeSources and Employment Classes
+    //remaining are the NextOfKin ands AdditionalIncomeSources
 
-    /*public void setEmployment(Employment employment) {
+    public void setEmployment(Employment employment) {
         this.employment = employment;
-    } */
+    }
 
     public void setChequeAcc(ChequeAcc chequeAcc) {
         this.chequeAcc = chequeAcc;
     }
+
 
     //getters
 
@@ -164,9 +164,9 @@ public class Individual extends Customer {
 
     //remaining is to get uhh a list of all Next Of Kin and Additional Income Sourses
 
-    /*public Employment employment() {
+    public Employment employment() {
         return employment;
-    } */
+    }
 
     @Override 
     public String getCustomerDetails() {
