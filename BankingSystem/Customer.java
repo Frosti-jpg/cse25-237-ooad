@@ -44,9 +44,9 @@ public abstract class Customer {
 
    //open Accounts
 
-   public void openSavingsAcc(int accountNo, String branch, Customer customer) {
+   public void openSavingsAcc(int accountNo, String branch) {
       if (this.savingsAcc == null) {
-         this.savingsAcc = new SavingsAcc(accountNo, branch, customer);
+         this.savingsAcc = new SavingsAcc(accountNo, branch, this);
          return;
       } else {
          System.out.println("Error: Account already exists.");
@@ -54,9 +54,9 @@ public abstract class Customer {
       }
    }
 
-   public void openInvestmentAcc(int accountNo, String branch, Customer customer) {
+   public void openInvestmentAcc(int accountNo, String branch) {
       if (investmentAcc == null) {
-         this.investmentAcc = new InvestmentAcc(accountNo, branch, customer);
+         this.investmentAcc = new InvestmentAcc(accountNo, branch, this);
          return;
       } else {
          System.out.println("Error: Account already exists.");

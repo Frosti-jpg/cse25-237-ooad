@@ -108,4 +108,103 @@ public class Individual extends Customer {
         this.employment = employment;
     } */
 
+    public void setChequeAcc(ChequeAcc chequeAcc) {
+        this.chequeAcc = chequeAcc;
+    }
+
+    //getters
+
+    public int getIdNumber() {
+        return idNumber;
+    }
+
+    public String getForenames() {
+        return forenames;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public int getAge() {
+        LocalDate todaysDate = LocalDate.now();
+        int tempYearOfBirth = dateOfBirth.getYear();
+        int tempCurrentYear = todaysDate.getYear();
+
+        return tempCurrentYear - tempYearOfBirth;
+    }
+
+    public String getPlaceOfBirth() {
+        return placeOfBirth;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public String getEyeColour() {
+        return eyeColour;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public ChequeAcc getChequeAcc() {
+        return chequeAcc;
+    }
+
+    //remaining is to get uhh a list of all Next Of Kin and Additional Income Sourses
+
+    /*public Employment employment() {
+        return employment;
+    } */
+
+    public String toString() {
+        return "PERSONAL DETAILS\n" +
+                "------------------------" +
+                "\nID Number: " + idNumber +
+                "\nForenames: " + forenames +
+                "\nLastname: " + lastname +
+                "\nNationality: " + nationality +
+                "\nGender: " + gender +
+                "\nEye Colour: " + eyeColour +
+                "\nPhone Number: " + phoneNumber +
+                "\nPostal Address: " + postalAddress +
+                "\nHome Address: " + homeAddress +
+                "\n\nNEXT OF KIN DETAILS" +
+                "------------------------" +
+
+                "\n\nBANK ACCOUNT DETAILS" +
+                "------------------------" +
+                "CHEQUE ACCOUNT" +
+                chequeAcc.toString() +
+                "\nINVESTMENT ACCOUNT" + 
+                super.getInvestmentAcc() +
+                "\nSAVING ACCOUNT" +
+                super.getSavingsAcc()
+                ;
+
+                //later 3 methods, each returns full transaction history for each account.
+    }    
+
+   public void openChequeAcc(int accountNo, String branch) {
+      if (chequeAcc == null) {
+         this.chequeAcc = new ChequeAcc(accountNo, branch, this);
+         return;
+      } else {
+         System.out.println("Error: Account already exists.");
+         return;
+      }
+      
+   }
+    
 }
