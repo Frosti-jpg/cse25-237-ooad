@@ -105,14 +105,20 @@ public class Individual extends Customer {
         this.homeAddress = homeAddress;
     }
 
-    //remaining are the NextOfKin ands AdditionalIncomeSources
-
     public void setEmployment(Employment employment) {
         this.employment = employment;
     }
 
     public void setChequeAcc(ChequeAcc chequeAcc) {
         this.chequeAcc = chequeAcc;
+    }
+
+    public void setNextOfKin(ArrayList<NextOfKin> nextOfKin) {
+        this.nextOfKin = nextOfKin;
+    }
+
+    public void setAdditionalIncomeSources(ArrayList<AdditionalIncomeSources> additionalIncomeSources) {
+        this.additionalIncomeSources = additionalIncomeSources;
     }
 
 
@@ -174,10 +180,16 @@ public class Individual extends Customer {
         return chequeAcc;
     }
 
-    //remaining is to get uhh a list of all Next Of Kin and Additional Income Sourses
-
     public Employment getEmployment() {
         return employment;
+    }
+
+    public ArrayList<NextOfKin> getNextOfKin() {
+        return nextOfKin;
+    }
+
+    public ArrayList<AdditionalIncomeSources> getAdditionalIncomeSources() {
+        return additionalIncomeSources;
     }
 
     @Override 
@@ -205,8 +217,6 @@ public class Individual extends Customer {
                 "\nSAVING ACCOUNT" +
                 super.getSavingsAcc()
                 ;
-
-                //later 3 methods, each returns full transaction history for each account.
     }    
 
    public void openChequeAcc(int accountNo, String branch) {
@@ -214,14 +224,18 @@ public class Individual extends Customer {
          this.chequeAcc = new ChequeAcc(accountNo, branch, this);
          return;
       } else {
-         System.out.println("Error: Account already exists.");
+        System.out.println("Error: Account already exists.");
          return;
       }
       
    }
 
-   public void addNextOfKin(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, char gender, int phoneNumber, String postalAddress, String homeAddress, String relationship) {
-      this.nextOfKin.add(new NextOfKin(idNumber, forenames, lastname, dateOfBirth, gender, phoneNumber, postalAddress, homeAddress, relationship));
-   }
+    public void addNextOfKin(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, char gender, int phoneNumber, String postalAddress, String homeAddress, String relationship) {
+        this.nextOfKin.add(new NextOfKin(idNumber, forenames, lastname, dateOfBirth, gender, phoneNumber, postalAddress, homeAddress, relationship));
+    }
     
+
+    public void addAdditionalIncomeSources(String sourceOfIncome) {
+        this.additionalIncomeSources.add(new AdditionalIncomeSources(sourceOfIncome));
+    }
 }

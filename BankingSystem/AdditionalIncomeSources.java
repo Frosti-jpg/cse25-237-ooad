@@ -24,4 +24,8 @@ public class AdditionalIncomeSources {
     public String getSourceOfIncome() {
         return sourceOfIncome;
     }
+
+    public String toString() {
+        return sourceOfIncome;
+    }
 }
