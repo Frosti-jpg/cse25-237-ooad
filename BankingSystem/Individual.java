@@ -158,13 +158,21 @@ public class Individual extends Customer {
         return phoneNumber;
     }
 
+    public String getPostalAddress() {
+        return postalAddress;
+    }
+
+    public String getHomeAddress() {
+        return homeAddress;
+    }
+
     public ChequeAcc getChequeAcc() {
         return chequeAcc;
     }
 
     //remaining is to get uhh a list of all Next Of Kin and Additional Income Sourses
 
-    public Employment employment() {
+    public Employment getEmployment() {
         return employment;
     }
 
