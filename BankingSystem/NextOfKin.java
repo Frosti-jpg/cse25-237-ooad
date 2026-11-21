@@ -12,6 +12,7 @@ public class NextOfKin {
     private int phoneNumber;
     private String postalAddress;
     private String homeAddress;
+    private String relationship;
 
     public NextOfKin() {
         idNumber = 0;
@@ -22,9 +23,10 @@ public class NextOfKin {
         phoneNumber = 0;
         postalAddress = "";
         homeAddress = "";
+        relationship = "";
     }
 
-    public NextOfKin(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, char gender, int phoneNumber, String postalAddress, String homeAddress) {
+    public NextOfKin(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, char gender, int phoneNumber, String postalAddress, String homeAddress, String relationship) {
         this.idNumber = idNumber;
         this.forenames = forenames;
         this.lastname = lastname;
@@ -33,6 +35,7 @@ public class NextOfKin {
         this.phoneNumber = phoneNumber;
         this.postalAddress = postalAddress;
         this.homeAddress = homeAddress;
+        this.relationship = relationship;
     }
 
     //setters
@@ -67,6 +70,10 @@ public class NextOfKin {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 
 
@@ -104,20 +111,20 @@ public class NextOfKin {
         return homeAddress;
     }
 
+    public String getRelationship() {
+        return relationship;
+    }
 
     public String toString() {
-    return "NEXT OF KIN DETAILS\n" +
-            "------------------------" +
-            "\nID Number: " + idNumber +
+    return  "\nID Number: " + idNumber +
             "\nForenames: " + forenames +
             "\nLastname: " + lastname +
             "\nGender: " + gender +
             "\nPhone Number: " + phoneNumber +
             "\nPostal Address: " + postalAddress +
-            "\nHome Address: " + homeAddress
+            "\nHome Address: " + homeAddress +
+            "\nRelationship: " + relationship + "\n"
             ;
     }
 
 }
-
-

@@ -1,13 +1,16 @@
 package BankingSystem;
 
+import java.util.ArrayList;
+
+
 public class Company extends Customer {
     
-    public String companyName;
-    public String companyType;
-    public String companyPhysicalAddress;
-    public int companyTelephone;
-    //public Shareholders[] shareholders;
-    public double yearlyTurnover;
+    private String companyName;
+    private String companyType;
+    private String companyPhysicalAddress;
+    private int companyTelephone;
+    private ArrayList<Shareholder> shareholder;
+    private  double yearlyTurnover;
 
     public Company() {
         companyName = "";
@@ -16,6 +19,8 @@ public class Company extends Customer {
         companyTelephone = 0;
 
         yearlyTurnover = 0;
+
+        shareholder = new ArrayList<>();
     }
 
     public Company(String companyName, String companyType, String companyPhysicalAddress, int companyTelephone, int yearlyTurnover) {
@@ -25,6 +30,8 @@ public class Company extends Customer {
         this.companyTelephone = companyTelephone;
 
         this.yearlyTurnover = yearlyTurnover;
+
+        shareholder = new ArrayList<>();
     }
 
     //setters
@@ -50,6 +57,10 @@ public class Company extends Customer {
         this.yearlyTurnover = yearlyTurnover;
     }
 
+    public void setShareholder(ArrayList<Shareholder> shareholder) {
+        this.shareholder = shareholder;
+    }
+
     //getters
 
     public String getCompanyName() {
@@ -73,6 +84,11 @@ public class Company extends Customer {
         return yearlyTurnover;
     }
 
+    public ArrayList<Shareholder> getShareholder() {
+        return shareholder;
+    }
+
+
     @Override 
     public String getCustomerDetails() {
         return "PERSONAL DETAILS\n" +
@@ -83,8 +99,9 @@ public class Company extends Customer {
                 "\nCompany Telephone: " + companyTelephone +
                 "\nYearly Turnover: " + yearlyTurnover +
                 
-                "\n\nNEXT OF KIN DETAILS" +
-                "------------------------" +
+                "\n\nSHAREHOLDER DETAILS" +
+                "------------------------\n" +
+                shareholder.toString() +
 
                 "\n\nBANK ACCOUNT DETAILS" +
                 "------------------------" +

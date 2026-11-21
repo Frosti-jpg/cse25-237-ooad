@@ -1,6 +1,7 @@
 package BankingSystem;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Individual extends Customer {
     
@@ -15,8 +16,8 @@ public class Individual extends Customer {
     private int phoneNumber;
     private String postalAddress;
     private String homeAddress;
-    //private NextOfKin[] nextOfKin; //
-    //private AdditionalIncomeSources[] additionalIncomeSources;
+    private ArrayList<NextOfKin> nextOfKin;
+    private ArrayList<AdditionalIncomeSources> additionalIncomeSources;
     private Employment employment;
 
     private ChequeAcc chequeAcc;
@@ -33,8 +34,8 @@ public class Individual extends Customer {
         phoneNumber = 0;
         postalAddress = "";
         homeAddress = "";
-        //nextOfKin = null;
-        //additionalIncomeSources = null;
+        nextOfKin = new ArrayList<>();
+        additionalIncomeSources = new ArrayList<>();
         
         employment = null;
         chequeAcc = null;
@@ -52,6 +53,9 @@ public class Individual extends Customer {
         this.phoneNumber = phoneNumber;
         this.postalAddress = postalAddress;
         this.homeAddress = homeAddress;
+
+        this.nextOfKin = new ArrayList<>();
+        this.additionalIncomeSources = new ArrayList<>();
 
     }
 
@@ -191,7 +195,7 @@ public class Individual extends Customer {
                 "\nHome Address: " + homeAddress +
                 "\n\nNEXT OF KIN DETAILS" +
                 "------------------------" +
-
+                nextOfKin.toString() +
                 "\n\nBANK ACCOUNT DETAILS" +
                 "------------------------" +
                 "CHEQUE ACCOUNT" +
@@ -214,6 +218,10 @@ public class Individual extends Customer {
          return;
       }
       
+   }
+
+   public void addNextOfKin(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, char gender, int phoneNumber, String postalAddress, String homeAddress, String relationship) {
+      this.nextOfKin.add(new NextOfKin(idNumber, forenames, lastname, dateOfBirth, gender, phoneNumber, postalAddress, homeAddress, relationship));
    }
     
 }
