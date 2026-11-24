@@ -212,28 +212,43 @@ public class Individual extends Customer {
                 "\n\nBANK ACCOUNT DETAILS" +
                 "------------------------" +
                 "CHEQUE ACCOUNT" +
-                chequeAcc.toString() +
+                checkForAccount(getChequeAcc(), "Cheque Account") +
                 "\nINVESTMENT ACCOUNT" + 
-                super.getInvestmentAcc().toString() +
+                checkForAccount(getInvestmentAcc(), "Investment Account") +
                 "\nSAVING ACCOUNT" +
-                super.getSavingsAcc().toString()
+                checkForAccount(getSavingsAcc(), "Savings Account")
                 ;
-    }    
+    }
+
+    public String checkForAccount(BankAcc bankAcc, String accountType) {
+        if (bankAcc == null) {
+            return "Message: " + accountType + " has not been opened yet.";
+        } else {
+            return bankAcc.toString();
+        }
+    }
+
+    public String checkForAccountHistory(BankAcc bankAcc, String accountType) {
+        if (bankAcc == null) {
+            return "Message: " + accountType + " has not been opened yet.";
+        } else {
+            return bankAcc.getTransactionHistory().toString();
+        }
+    }
 
     public String getAllTransactionHistory() {
-        return "CHEQUE ACCOUNT" +
-                "\n-----------------------------\n" +
-                chequeAcc.getTransactionHistory().toString() +
-                "SAVINGS ACCOUNT" +
-                "\n-----------------------------\n" + 
-                getSavingsAcc().getTransactionHistory().toString() +
-                "INVESTMENT ACCOUNT" +
-                "\n-----------------------------\n" + 
-                getInvestmentAcc().getTransactionHistory().toString()
-        
-        
-        ;
-    }
+      return "CHEQUE ACCOUNT" +
+         "\n-----------------------------\n" +
+         checkForAccountHistory(getChequeAcc(), "Cheque Account") +
+         "SAVINGS ACCOUNT" +
+         "\n-----------------------------\n" +
+         checkForAccountHistory(getSavingsAcc(), "Cheque Account") +
+         "INVESTMENT ACCOUNT" +
+         "\n-----------------------------\n" +
+         checkForAccountHistory(getInvestmentAcc(), "Cheque Account")
+      ;
+   }
+
 
    public void openChequeAcc(String accountNo, String branch) {
       if (chequeAcc == null) {
