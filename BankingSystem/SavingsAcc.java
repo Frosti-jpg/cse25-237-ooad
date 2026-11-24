@@ -29,7 +29,7 @@ public class SavingsAcc extends BankAcc {
         percentageDailyInterest = 0.0;
     }
 
-    public SavingsAcc(int accountNo, String branch, Customer customer) {
+    public SavingsAcc(String accountNo, String branch, Customer customer) {
         super(accountNo, branch, customer);
 
         this.totalAccural = 0.0;

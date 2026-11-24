@@ -1,18 +1,23 @@
 package BankingSystem;
 
+import java.util.ArrayList;
+
 public abstract class Customer {
 
    private SavingsAcc savingsAcc;
    private InvestmentAcc investmentAcc;
+   private ArrayList<TransactionHistory> transactionHistory;
    
    public Customer() {
       savingsAcc = null;
       investmentAcc = null;
+      transactionHistory = new ArrayList<>();
    }
 
    public Customer(SavingsAcc savingsAcc, InvestmentAcc investmentAcc) {
       this.savingsAcc = savingsAcc;
       this.investmentAcc = investmentAcc;
+      transactionHistory = new ArrayList<>();
    }
 
 
@@ -37,14 +42,18 @@ public abstract class Customer {
       return investmentAcc;
    }
 
-   
+   public ArrayList<TransactionHistory> getTransactionHistory() {
+       return transactionHistory;
+   }
+
+
    public abstract String getCustomerDetails();
 
 
 
    //open Accounts
 
-   public void openSavingsAcc(int accountNo, String branch) {
+   public void openSavingsAcc(String accountNo, String branch) {
       if (this.savingsAcc == null) {
          this.savingsAcc = new SavingsAcc(accountNo, branch, this);
          return;
@@ -54,7 +63,7 @@ public abstract class Customer {
       }
    }
 
-   public void openInvestmentAcc(int accountNo, String branch) {
+   public void openInvestmentAcc(String accountNo, String branch) {
       if (investmentAcc == null) {
          this.investmentAcc = new InvestmentAcc(accountNo, branch, this);
          return;

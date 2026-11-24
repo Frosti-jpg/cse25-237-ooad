@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 abstract class BankAcc {
 
-   private int accountNo;
+   private String accountNo;
    private double accountBalance;
    private String branch;
    private Customer customer;
@@ -14,7 +14,7 @@ abstract class BankAcc {
    //No Arg Constructor
 
    public BankAcc() {
-      accountNo = 0;
+      accountNo = "";
       accountBalance = 0.0;
       branch = "";
       customer = null;
@@ -23,7 +23,7 @@ abstract class BankAcc {
 
    //Parameterised Constructor
 
-   BankAcc(int accountNo, String branch, Customer customer) {
+   BankAcc(String accountNo, String branch, Customer customer) {
       this.accountNo = accountNo;
       this.branch = branch;
       this.customer = customer;
@@ -42,7 +42,7 @@ abstract class BankAcc {
       return accountBalance;
    }
 
-   public int getaccountNo() {
+   public String getaccountNo() {
       return accountNo;
    }
    

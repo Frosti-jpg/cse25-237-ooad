@@ -30,7 +30,7 @@ public class InvestmentAcc extends BankAcc {
 
     }
 
-    public InvestmentAcc(int accountNo, String branch, Customer customer) {
+    public InvestmentAcc(String accountNo, String branch, Customer customer) {
         super(accountNo, branch, customer);
 
         this.totalAccural = 0.0;

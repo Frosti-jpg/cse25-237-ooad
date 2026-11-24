@@ -188,7 +188,7 @@ public class Individual extends Customer {
         return nextOfKin;
     }
 
-    public ArrayList<AdditionalIncomeSources> getAdditionalIncomeSources() {
+    public ArrayList<AdditionalIncomeSources> getAdditionalIncomeSources() {  //returns the ArrayList
         return additionalIncomeSources;
     }
 
@@ -219,7 +219,7 @@ public class Individual extends Customer {
                 ;
     }    
 
-   public void openChequeAcc(int accountNo, String branch) {
+   public void openChequeAcc(String accountNo, String branch) {
       if (chequeAcc == null) {
          this.chequeAcc = new ChequeAcc(accountNo, branch, this);
          return;
