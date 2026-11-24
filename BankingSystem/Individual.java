@@ -194,6 +194,7 @@ public class Individual extends Customer {
 
     @Override 
     public String getCustomerDetails() {
+
         return "PERSONAL DETAILS\n" +
                 "------------------------" +
                 "\nID Number: " + idNumber +
@@ -213,11 +214,26 @@ public class Individual extends Customer {
                 "CHEQUE ACCOUNT" +
                 chequeAcc.toString() +
                 "\nINVESTMENT ACCOUNT" + 
-                super.getInvestmentAcc() +
+                super.getInvestmentAcc().toString() +
                 "\nSAVING ACCOUNT" +
-                super.getSavingsAcc()
+                super.getSavingsAcc().toString()
                 ;
     }    
+
+    public String getAllTransactionHistory() {
+        return "CHEQUE ACCOUNT" +
+                "\n-----------------------------\n" +
+                chequeAcc.getTransactionHistory().toString() +
+                "SAVINGS ACCOUNT" +
+                "\n-----------------------------\n" + 
+                getSavingsAcc().getTransactionHistory().toString() +
+                "INVESTMENT ACCOUNT" +
+                "\n-----------------------------\n" + 
+                getInvestmentAcc().getTransactionHistory().toString()
+        
+        
+        ;
+    }
 
    public void openChequeAcc(String accountNo, String branch) {
       if (chequeAcc == null) {

@@ -1,6 +1,7 @@
 package BankingSystem;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 abstract class BankAcc {
 
@@ -9,6 +10,9 @@ abstract class BankAcc {
    private String branch;
    private Customer customer;
    private final LocalDate dateOpened;    //for implementing a way to credit interest.
+
+   private ArrayList<TransactionHistory> transactionHistory;
+
 
 
    //No Arg Constructor
@@ -19,6 +23,8 @@ abstract class BankAcc {
       branch = "";
       customer = null;
       dateOpened = null;
+
+      transactionHistory = new ArrayList<>();
    }
 
    //Parameterised Constructor
@@ -30,12 +36,20 @@ abstract class BankAcc {
       
       this.accountBalance = 0.0;
       this.dateOpened = LocalDate.now();
+
+      transactionHistory = new ArrayList<>();
    }
+
+   //abstract methods
 
    public abstract void withdraw(double amount);
    
    public abstract void deposit(double amount);
    
+
+   //setters
+
+
    //getters
    
    public double getBalance() {
@@ -56,6 +70,10 @@ abstract class BankAcc {
 
    public LocalDate getDateOpened() {
       return dateOpened;
+   }
+
+   public ArrayList<TransactionHistory> getTransactionHistory() {
+       return transactionHistory;
    }
    
    public String toString() {

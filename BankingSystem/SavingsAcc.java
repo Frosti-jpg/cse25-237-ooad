@@ -45,27 +45,31 @@ public class SavingsAcc extends BankAcc {
     //Abstract methods
     @Override
     public void deposit(double amount) {
+        double currentBalance = getBalance();
         if (amount <= 0) {  //will check if the amount entered is 1 or above.
             System.out.println("Error: Amount entered is too low.");
             return;
         } else {
             addToBalance(amount);  //adds deposited amount to balance
+            getTransactionHistory().add(new TransactionHistory(super.getaccountNo(), "Savings Account", "Deposit", amount, 0, super.getBalance(), currentBalance));
             return;
         }
     }
 
     @Override 
     public void withdraw(double amount) {
-        double tempBalance = getBalance();
+        double currentBalance = getBalance();
 
         if (lastWithdrawDate.isBefore(nextWithdrawDate)) {
             System.out.println("Error: Cannot withraw from this account until " + nextWithdrawDate);
             return;
-        } else if (tempBalance < amount || amount <= 0) {
+        } else if (currentBalance < amount || amount <= 0) {
             System.out.println("Error: Insufficient Funds or invalid amount input");
             return;
         } else {
         subtractFromBalance(amount); //remove from balance
+        getTransactionHistory().add(new TransactionHistory(super.getaccountNo(), "Investment Account", "Withdraw", amount, 0, super.getBalance(), currentBalance));
+
         this.lastWithdrawDate = LocalDate.now();
         this.nextWithdrawDate = lastWithdrawDate.plusYears(2);
         }

@@ -65,7 +65,7 @@ public class ChequeAcc extends BankAcc {
   //uncategorised
 
   @Override 
-public void withdraw(double amount) {
+  public void withdraw(double amount) {
 
     double currentBalance = super.getBalance();  //retrives balance
     double percentageFee = amount * withdrawalFeePercent;  //calculates 1% of withdrawl amount
@@ -93,13 +93,16 @@ public void withdraw(double amount) {
 
       System.out.println("Message: Withdraw Successful.");
 
-      //Time for the TransactionHistory :D.....
+      getTransactionHistory().add(new TransactionHistory(super.getaccountNo(), "Cheque Account", "Withdraw", amount, percentageFee, super.getBalance(), currentBalance));
+
+      return;
     }
   }
 
 
   @Override 
   public void deposit(double amount) {
+    double currentBalance = getBalance();
     LocalDate nextTransactctionSumReset = lastTransactionSumReset.plusMonths(1);
 
     if (monthlyTransactionSum + amount > transactionLimit) {
@@ -118,6 +121,8 @@ public void withdraw(double amount) {
       double creditedAmount = amount - depositFee; //crediting the fees
       super.addToBalance(creditedAmount); //add money to account balance
       monthlyTransactionSum += amount; //adding to the transactionCounter
+
+      getTransactionHistory().add(new TransactionHistory(super.getaccountNo(), "Cheque Account", "Deposit", amount, depositFee, super.getBalance(), currentBalance));
 
       System.out.println("Message: Deposit Successful.");
       return;
@@ -161,9 +166,10 @@ public void withdraw(double amount) {
         monthlyTransactionSum += amount;
 
         System.out.println("Message: Transfer Successful!");
-        return;
 
-        //Lastly here would be to add Transaction history and pass to the method in the recipient as wel
+       getTransactionHistory().add(new TransactionHistory(super.getaccountNo(), "Cheque Account", "Withdraw", amount, 0, super.getBalance(), currentBalance));
+
+        return;
       }
     }
   }
