@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Individual extends Customer {
     
-    private int idNumber;
+    private String idNumber;
     private String forenames;
     private String lastname;
     private LocalDate dateOfBirth;
@@ -13,7 +13,7 @@ public class Individual extends Customer {
     private String nationality;
     private char gender;
     private String eyeColour;
-    private int phoneNumber;
+    private String phoneNumber;
     private String postalAddress;
     private String homeAddress;
     private ArrayList<NextOfKin> nextOfKin;
@@ -23,7 +23,7 @@ public class Individual extends Customer {
     private ChequeAcc chequeAcc;
 
     public Individual() {
-        idNumber = 0;
+        idNumber = "";
         forenames = "";
         lastname = "";
         dateOfBirth = null;
@@ -31,7 +31,7 @@ public class Individual extends Customer {
         nationality = "";
         gender = ' ';
         eyeColour = "";
-        phoneNumber = 0;
+        phoneNumber = "";
         postalAddress = "";
         homeAddress = "";
         nextOfKin = new ArrayList<>();
@@ -41,11 +41,11 @@ public class Individual extends Customer {
         chequeAcc = null;
     }
 
-    public Individual(int idNumber, String forenames, String lastname, LocalDate dateOfBirth, String placeOfBirth, String nationality, char gender, String eyeColour, int phoneNumber, String postalAddress, String homeAddress) {
+    public Individual(String idNumber, String forenames, String lastname, int year, int month, int day, String placeOfBirth, String nationality, char gender, String eyeColour, String phoneNumber, String postalAddress, String homeAddress) {
         this.idNumber = idNumber;
         this.forenames = forenames;
         this.lastname = lastname;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = LocalDate.of(year, month, day);
         this.placeOfBirth = placeOfBirth;
         this.nationality = nationality;
         this.gender = gender;
@@ -61,7 +61,7 @@ public class Individual extends Customer {
 
     //setters
 
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -93,7 +93,7 @@ public class Individual extends Customer {
         this.eyeColour = eyeColour;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -124,7 +124,7 @@ public class Individual extends Customer {
 
     //getters
 
-    public int getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
@@ -164,7 +164,7 @@ public class Individual extends Customer {
         return eyeColour;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
