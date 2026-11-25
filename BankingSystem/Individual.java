@@ -209,13 +209,13 @@ public class Individual extends Customer {
                 "\n\nNEXT OF KIN DETAILS" +
                 "------------------------" +
                 nextOfKin.toString() +
-                "\n\nBANK ACCOUNT DETAILS" +
-                "------------------------" +
-                "CHEQUE ACCOUNT" +
+                "\n\nBANK ACCOUNT DETAILS\n" +
+                "------------------------\n\n" +
+                "CHEQUE ACCOUNT\n" +
                 checkForAccount(getChequeAcc(), "Cheque Account") +
-                "\nINVESTMENT ACCOUNT" + 
+                "\nINVESTMENT ACCOUNT\n" + 
                 checkForAccount(getInvestmentAcc(), "Investment Account") +
-                "\nSAVING ACCOUNT" +
+                "\nSAVING ACCOUNT\n" +
                 checkForAccount(getSavingsAcc(), "Savings Account")
                 ;
     }
